@@ -1,0 +1,94 @@
+Real-Time Weather Monitoring System
+This project is a real-time data processing system for monitoring and analyzing weather conditions using the OpenWeatherMap API. It retrieves weather data at regular intervals for Indian metropolitan cities, calculates daily rollups and aggregates, and alerts users when predefined thresholds are breached.
+
+Table of Contents
+Project Overview
+Features
+Requirements
+Setup Instructions
+Configuration
+Running the Application
+Test Cases
+Design Choices
+Future Enhancements
+Project Overview
+The Real-Time Weather Monitoring System collects and processes weather data from OpenWeatherMap, focusing on parameters such as temperature, weather condition, and perceived temperature. This system supports daily weather summaries and threshold-based alerts and includes a visualization component for trend analysis.
+
+Features
+Continuous Weather Monitoring: Fetches weather data at regular intervals for multiple cities in India.
+Daily Rollups and Aggregates: Calculates daily summaries like average, maximum, and minimum temperatures and most frequent weather conditions.
+Alerting System: Configurable thresholds for weather alerts, notifying users if conditions exceed specified limits.
+Visualization: Displays daily weather summaries, historical trends, and triggered alerts.
+Requirements
+Python: >= 3.8
+Docker or Podman (Optional): For containerizing the application and database.
+Dependencies: Listed in requirements.txt
+Setup Instructions
+Clone the Repository:
+
+bash
+Copy code
+git clone <repository-url>
+cd <repository-directory>
+Install Dependencies: Use pip to install required dependencies.
+
+bash
+Copy code
+pip install -r requirements.txt
+Get API Key from OpenWeatherMap: Sign up at OpenWeatherMap and get an API key. Update the config.json with your API key.
+
+Setting up Docker Containers (Optional): If using Docker for the database or web server:
+
+bash
+Copy code
+docker-compose up -d
+This will set up the necessary containers and network.
+
+Configuration
+Update the config.json file with the following parameters:
+
+API Key: Set your OpenWeatherMap API key.
+Fetch Interval: Set the interval for API calls (in seconds).
+Alert Thresholds: Configure temperature thresholds or weather condition alerts.
+Example config.json:
+
+json
+Copy code
+{
+    "api_key": "YOUR_API_KEY",
+    "interval_seconds": 300,
+    "thresholds": {
+        "temperature": 35,
+        "weather_condition": "Rain"
+    }
+}
+Running the Application
+Start the Application:
+
+bash
+Copy code
+python src/main.py
+Accessing the Dashboard:
+
+The visualization dashboard is accessible at http://localhost:8000 if a web server is running.
+Test Cases
+Run tests using unittest:
+
+bash
+Copy code
+python -m unittest discover -s tests
+Key Test Scenarios
+System Setup: Verifies API key validity and connectivity.
+Data Retrieval: Tests API data retrieval and interval configuration.
+Temperature Conversion: Ensures correct temperature conversion (Kelvin to Celsius).
+Daily Summaries: Validates daily aggregates for accuracy.
+Alerting: Checks threshold breach alerts.
+Design Choices
+Modular Design: The system is split into distinct components (data retrieval, processing, alerts, and visualization) for maintainability.
+Data Storage: Stores daily summaries in a lightweight database (SQLite) or JSON file.
+Real-Time Processing: Utilizes a configurable interval for periodic data fetches.
+Alerting System: Threshold-based alerts designed for easy configuration and extension.
+Future Enhancements
+Additional Weather Parameters: Extend rollup calculations to include humidity and wind speed.
+Forecast Summaries: Integrate with forecast APIs to generate predicted weather summaries.
+Notification System: Expand alerts to include SMS or email notifications.
